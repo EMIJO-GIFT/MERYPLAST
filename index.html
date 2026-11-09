@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soluciones en Inyección y Soplado de Plásticos | Fabricación Industrial y Envases</title>
+  <meta name="description"
+    content="Especialistas en inyección de piezas técnicas y soplado de envases plásticos de alta precisión (PEAD, PET, PP). Desarrollo de moldes, matricería y producción masiva para la industria cosmética, farmacéutica, química y alimentaria.">
+  <!-- Tailwind CSS CDN con configuración -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              200: '#bae0fd',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              800: '#0c4a6e',
+              900: '#082f49',
+              accent: '#f97316'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .gradient-hero {
+      background: radial-gradient(circle at top right, rgba(2, 132, 199, 0.15), transparent 50%),
+        radial-gradient(circle at bottom left, rgba(249, 115, 22, 0.08), transparent 50%);
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- TOP BAR CORPORATIVA -->
+  <div class="bg-brand-900 text-slate-300 text-xs py-2 px-4 border-b border-brand-800/50">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-6">
+        <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-accent"></i>
+          Planta de Producción y Matricería Propia</span>
+        <span class="hidden md:flex items-center gap-1.5"><i data-lucide="shield-check"
+            class="w-3.5 h-3.5 text-emerald-400"></i> Materiales Vírgenes Certificados y Líneas PCR</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="mailto:contacto@tuempresa.com" class="hover:text-white transition flex items-center gap-1.5"><i
+            data-lucide="mail" class="w-3.5 h-3.5"></i> cotizaciones@tuempresa.com</a>
+        <span class="text-slate-600">|</span>
+        <a href="https://wa.me/573000000000" target="_blank"
+          class="hover:text-emerald-400 transition flex items-center gap-1.5 text-emerald-300 font-medium"><i
+            data-lucide="message-circle" class="w-3.5 h-3.5"></i> WhatsApp Ventas</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR PRINCIPAL -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logotipo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div
+            class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition">
+            <i data-lucide="layers" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span
+              class="text-2xl font-extrabold font-display tracking-tight text-slate-900 block leading-none">PLASTI<span
+                class="text-brand-500">CORP</span></span>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400">Inyección & Soplado</span>
+          </div>
+        </a>
+
+        <!-- Menú de Navegación Desktop -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+          <a href="#servicios" class="hover:text-brand-600 transition">Procesos & Servicios</a>
+          <a href="#catalogo" class="hover:text-brand-600 transition">Catálogo de Productos</a>
+          <a href="#maquinaria" class="hover:text-brand-600 transition">Capacidad Técnica</a>
+          <a href="#nosotros" class="hover:text-brand-600 transition">Sobre Nosotros</a>
+          <a href="#cotizador" class="hover:text-brand-600 transition">Cotizador</a>
+        </nav>
+
+        <!-- CTA Principal -->
+        <div class="hidden md:flex items-center gap-4">
+          <a href="#cotizador"
+            class="bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white px-5 py-2.5 rounded-lg text-sm font-bold shadow-md shadow-brand-600/20 hover:shadow-lg transition flex items-center gap-2">
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+            Solicitar Cotización
+          </a>
+        </div>
+
+        <!-- Botón Mobile -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 hover:text-slate-900 focus:outline-none">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menú Móvil Desplegable -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
+      <a href="#servicios" class="block py-2 text-slate-700 font-semibold hover:text-brand-600">Procesos & Servicios</a>
+      <a href="#catalogo" class="block py-2 text-slate-700 font-semibold hover:text-brand-600">Catálogo de Productos</a>
+      <a href="#maquinaria" class="block py-2 text-slate-700 font-semibold hover:text-brand-600">Capacidad Técnica</a>
+      <a href="#nosotros" class="block py-2 text-slate-700 font-semibold hover:text-brand-600">Sobre Nosotros</a>
+      <a href="#cotizador" class="block py-2 text-slate-700 font-semibold hover:text-brand-600">Cotizador</a>
+      <a href="#cotizador"
+        class="w-full text-center block bg-brand-600 text-white py-2.5 rounded-lg font-bold">Solicitar Cotización</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative overflow-hidden gradient-hero pt-12 pb-24 md:pt-20 md:pb-32 border-b border-slate-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <!-- Texto Hero -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div
+            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-100/80 text-brand-800 text-xs font-bold uppercase tracking-wider border border-brand-200">
+            <i data-lucide="cpu" class="w-3.5 h-3.5 text-brand-600"></i>
+            Ingeniería de Plásticos de Alta Precisión
+          </div>
+          <h1
+            class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-slate-900 tracking-tight leading-[1.1]">
+            Fabricación Industrial en <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-cyan-600">Inyección y
+              Soplado</span> de Plásticos
+          </h1>
+          <p class="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            Transformamos resinas termoplásticas (PEAD, PP, PET, ABS) en envases y piezas técnicas de alto rendimiento.
+            Desde el diseño de moldes personalizados hasta la producción a gran escala con tolerancias milimétricas.
+          </p>
+
+          <!-- Badges de Certificación / Materiales -->
+          <div class="flex flex-wrap gap-3 justify-center lg:justify-start pt-2">
+            <span
+              class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-brand-500"></i> Grado Alimentario & Farmacéutico
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-brand-500"></i> Matricería CAD/CAM y Prototipado 3D
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-brand-500"></i> Líneas 100% Reciclables & PCR
+            </span>
+          </div>
+
+          <!-- CTAs Hero -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+            <a href="#cotizador"
+              class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-brand-600/30 hover:shadow-xl transition flex items-center justify-center gap-2.5">
+              <span>Cotizar Proyecto o Lote</span>
+              <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </a>
+            <a href="#catalogo"
+              class="bg-white hover:bg-slate-100 text-slate-800 font-bold px-7 py-3.5 rounded-xl border border-slate-200 shadow-sm transition flex items-center justify-center gap-2">
+              <i data-lucide="package" class="w-5 h-5 text-slate-500"></i>
+              Explorar Catálogo
+            </a>
+          </div>
+        </div>
+
+        <!-- Tarjeta Visual Interactiva / Métricas -->
+        <div class="lg:col-span-5">
+          <div class="relative bg-white rounded-3xl p-8 shadow-2xl border border-slate-100 overflow-hidden">
+            <div class="absolute -top-12 -right-12 w-48 h-48 bg-brand-50 rounded-full blur-2xl pointer-events-none">
+            </div>
+
+            <h3 class="text-xl font-bold font-display text-slate-900 mb-6 flex items-center gap-2">
+              <i data-lucide="activity" class="w-5 h-5 text-brand-600"></i>
+              Nuestra Capacidad Productiva
+            </h3>
+
+            <div class="space-y-4">
+              <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div class="flex items-center gap-3.5">
+                  <div
+                    class="w-10 h-10 rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center font-bold">
+                    <i data-lucide="boxes" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-sm">Capacidad de Inyección</h4>
+                    <p class="text-xs text-slate-500">Fuerza de cierre: 50 a 650 Toneladas</p>
+                  </div>
+                </div>
+                <span class="text-xs font-bold text-brand-700 bg-brand-100 px-2.5 py-1 rounded-md">+5M piezas/mes</span>
+              </div>
+
+              <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div class="flex items-center gap-3.5">
+                  <div
+                    class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                    <i data-lucide="cylinder" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-sm">Soplado de Envases</h4>
+                    <p class="text-xs text-slate-500">Capacidades desde 30 ml hasta 20 Litros</p>
+                  </div>
+                </div>
+                <span class="text-xs font-bold text-amber-700 bg-amber-100 px-2.5 py-1 rounded-md">+3M
+                  envases/mes</span>
+              </div>
+
+              <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div class="flex items-center gap-3.5">
+                  <div
+                    class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+                    <i data-lucide="wrench" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-sm">Desarrollo de Moldes</h4>
+                    <p class="text-xs text-slate-500">Diseño 3D CAD/CAM en acero templado</p>
+                  </div>
+                </div>
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">Prototipos en
+                  72h</span>
+              </div>
+            </div>
+
+            <!-- Resina y Normativas -->
+            <div class="mt-6 pt-6 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+              <span class="flex items-center gap-1"><i data-lucide="shield" class="w-4 h-4 text-brand-500"></i> Control
+                de Calidad ISO</span>
+              <span class="flex items-center gap-1"><i data-lucide="truck" class="w-4 h-4 text-brand-500"></i> Entregas
+                a Nivel Nacional</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN: PROCESOS Y SERVICIOS -->
+  <section id="servicios" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span
+          class="text-xs font-extrabold uppercase tracking-widest text-brand-600 bg-brand-50 px-3 py-1 rounded-full border border-brand-200">
+          Especialización Industrial
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-slate-900 mt-3">
+          Nuestras Líneas de Transformación de Plásticos
+        </h2>
+        <p class="text-slate-600 text-base mt-4">
+          Dominamos los procesos termoplásticos más exigentes con tecnología de control digital computarizado para
+          garantizar espesores uniformes y acabados impecables.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Servicio 1: Inyección -->
+        <div
+          class="bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-brand-500 hover:shadow-xl transition-all group">
+          <div
+            class="w-14 h-14 rounded-2xl bg-brand-600 text-white flex items-center justify-center mb-6 shadow-md shadow-brand-500/20 group-hover:scale-110 transition">
+            <i data-lucide="cpu" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-2xl font-bold font-display text-slate-900 mb-3">Inyección de Plásticos</h3>
+          <p class="text-slate-600 text-sm leading-relaxed mb-6">
+            Fabricación de piezas sólidas y complejas con altísima precisión dimensional. Ideal para tapas flip-top,
+            roscas de seguridad, piezas automotrices, cubetas industriales y componentes estructurales.
+          </p>
+          <ul class="space-y-2.5 text-xs font-semibold text-slate-700">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Resinas:
+              Polipropileno (PP), Polietileno (PEAD/PEBD), ABS, Poliestireno.</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Cavidades
+              múltiples con canales calientes.</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Colores
+              personalizados bajo código Pantone / Masterbatch.</li>
+          </ul>
+        </div>
+
+        <!-- Servicio 2: Soplado -->
+        <div
+          class="bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-brand-500 hover:shadow-xl transition-all group">
+          <div
+            class="w-14 h-14 rounded-2xl bg-cyan-600 text-white flex items-center justify-center mb-6 shadow-md shadow-cyan-500/20 group-hover:scale-110 transition">
+            <i data-lucide="cylinder" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-2xl font-bold font-display text-slate-900 mb-3">Soplado de Cuerpos Huecos</h3>
+          <p class="text-slate-600 text-sm leading-relaxed mb-6">
+            Producción de envases rígidos y flexibles de 50 ml a 20 litros. Especialmente desarrollados para contener
+            líquidos químicos, productos de aseo, agroquímicos, cosméticos y alimentos con barrera hermética.
+          </p>
+          <ul class="space-y-2.5 text-xs font-semibold text-slate-700">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-500"></i>
+              Extrusión-Soplado y Soplado de Preformas PET.</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-500"></i> Opciones con
+              banda visor translúcida de nivel.</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-500"></i> Ensayos
+              rigurosos de estanqueidad y caída libre.</li>
+          </ul>
+        </div>
+
+        <!-- Servicio 3: Moldes y Matricería -->
+        <div
+          class="bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-brand-500 hover:shadow-xl transition-all group">
+          <div
+            class="w-14 h-14 rounded-2xl bg-brand-accent text-white flex items-center justify-center mb-6 shadow-md shadow-orange-500/20 group-hover:scale-110 transition">
+            <i data-lucide="cog" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-2xl font-bold font-display text-slate-900 mb-3">Matricería & Moldes a Medida</h3>
+          <p class="text-slate-600 text-sm leading-relaxed mb-6">
+            Acompañamiento integral desde la idea conceptual o plano de ingeniería hasta el mecanizado CNC del molde
+            definitivo en aceros especiales templados (P20, H13) para millones de ciclos de vida.
+          </p>
+          <ul class="space-y-2.5 text-xs font-semibold text-slate-700">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Modelado
+              paramétrico 3D y simulación de flujo.</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i> Muestras
+              funcionales previas a fabricación en serie.</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-accent"></i>
+              Mantenimiento preventivo y custodia de moldes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN: CATÁLOGO DE PRODUCTOS -->
+  <section id="catalogo" class="py-20 bg-slate-100 border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+        <div>
+          <span
+            class="text-xs font-extrabold uppercase tracking-widest text-brand-600 bg-brand-50 px-3 py-1 rounded-full border border-brand-200">
+            Portafolio Estándar
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-slate-900 mt-3">
+            Catálogo de Envases y Piezas Plásticas
+          </h2>
+          <p class="text-slate-600 text-sm mt-2 max-w-xl">
+            Modelos de línea con moldes disponibles listos para producción inmediata, además de fabricación
+            personalizada.
+          </p>
+        </div>
+
+        <!-- Filtros Rápidos -->
+        <div class="flex flex-wrap gap-2 text-xs font-bold" id="catalogo-filters">
+          <button class="filter-btn active bg-brand-600 text-white px-4 py-2 rounded-lg transition"
+            data-filter="all">Todos</button>
+          <button
+            class="filter-btn bg-white text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-lg border border-slate-200 transition"
+            data-filter="envases">Envases y Botellas</button>
+          <button
+            class="filter-btn bg-white text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-lg border border-slate-200 transition"
+            data-filter="galones">Galones y Bidones</button>
+          <button
+            class="filter-btn bg-white text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-lg border border-slate-200 transition"
+            data-filter="tapas">Tapas y Cierres</button>
+        </div>
+      </div>
+
+      <!-- Grid de Productos -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="productos-grid">
+        <!-- Producto 1 -->
+        <div
+          class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition"
+          data-category="envases">
+          <div class="h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100 relative">
+            <span
+              class="absolute top-3 left-3 bg-brand-50 text-brand-700 text-[10px] font-extrabold px-2 py-0.5 rounded border border-brand-200">Soplado
+              PET</span>
+            <i data-lucide="flask-conical" class="w-20 h-20 text-brand-500/80"></i>
+          </div>
+          <div class="p-5">
+            <span class="text-xs text-slate-400 font-semibold">Cosmético / Farmacéutico</span>
+            <h4 class="font-bold text-slate-900 text-base mt-1">Botella Cilíndrica Boston</h4>
+            <p class="text-xs text-slate-500 mt-1">Capacidades: 120ml, 250ml, 500ml y 1000ml. Rosca 28/410 estándar.</p>
+            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-700">Material: PET 100% Virgen</span>
+              <a href="#cotizador"
+                class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">Cotizar <i
+                  data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div
+          class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition"
+          data-category="galones">
+          <div class="h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100 relative">
+            <span
+              class="absolute top-3 left-3 bg-cyan-50 text-cyan-700 text-[10px] font-extrabold px-2 py-0.5 rounded border border-cyan-200">Soplado
+              PEAD</span>
+            <i data-lucide="box" class="w-20 h-20 text-cyan-600/80"></i>
+          </div>
+          <div class="p-5">
+            <span class="text-xs text-slate-400 font-semibold">Químico / Aseo Industrial</span>
+            <h4 class="font-bold text-slate-900 text-base mt-1">Galón Apilable 4 Litros</h4>
+            <p class="text-xs text-slate-500 mt-1">Manija ergonómica reforzada, alta resistencia al apilamiento en
+              estibas.</p>
+            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-700">Material: PEAD / Visor</span>
+              <a href="#cotizador"
+                class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">Cotizar <i
+                  data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div
+          class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition"
+          data-category="galones">
+          <div class="h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100 relative">
+            <span
+              class="absolute top-3 left-3 bg-amber-50 text-amber-700 text-[10px] font-extrabold px-2 py-0.5 rounded border border-amber-200">Soplado
+              Pesado</span>
+            <i data-lucide="container" class="w-20 h-20 text-amber-600/80"></i>
+          </div>
+          <div class="p-5">
+            <span class="text-xs text-slate-400 font-semibold">Agroquímica / Lubricantes</span>
+            <h4 class="font-bold text-slate-900 text-base mt-1">Bidón Caneca 20 Litros</h4>
+            <p class="text-xs text-slate-500 mt-1">Tapa rosca con precinto de seguridad y tapón de venteo anti-presión.
+            </p>
+            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-700">Material: PEAD Alta Densidad</span>
+              <a href="#cotizador"
+                class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">Cotizar <i
+                  data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 4 -->
+        <div
+          class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition"
+          data-category="tapas">
+          <div class="h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100 relative">
+            <span
+              class="absolute top-3 left-3 bg-purple-50 text-purple-700 text-[10px] font-extrabold px-2 py-0.5 rounded border border-purple-200">Inyección
+              PP</span>
+            <i data-lucide="disc" class="w-20 h-20 text-purple-600/80"></i>
+          </div>
+          <div class="p-5">
+            <span class="text-xs text-slate-400 font-semibold">Alimentos / Cosméticos</span>
+            <h4 class="font-bold text-slate-900 text-base mt-1">Tapa Flip-Top & Dosificadora</h4>
+            <p class="text-xs text-slate-500 mt-1">Roscas 24/410, 28/400 y 38mm. Sistema anti-goteo y cierre hermético.
+            </p>
+            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-700">Material: PP Homopolímero</span>
+              <a href="#cotizador"
+                class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">Cotizar <i
+                  data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN: CAPACIDAD TÉCNICA Y CALIDAD -->
+  <section id="maquinaria" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span
+            class="text-xs font-extrabold uppercase tracking-widest text-brand-600 bg-brand-50 px-3 py-1 rounded-full border border-brand-200">
+            Infraestructura Industrial
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-slate-900 mt-3">
+            Garantía de Calidad en Cada Ciclo de Producción
+          </h2>
+          <p class="text-slate-600 text-base mt-4 leading-relaxed">
+            Nuestra planta opera bajo estrictos protocolos de control de procesos, minimizando mermas y asegurando que
+            cada lote cumpla fielmente las especificaciones de peso, calibre y resistencia de tu empresa.
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-6 mt-8">
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+              <i data-lucide="shield-check" class="w-8 h-8 text-brand-600 mb-2"></i>
+              <h4 class="font-bold text-slate-900 text-sm">Laboratorio de Ensayos</h4>
+              <p class="text-xs text-slate-500 mt-1">Pruebas de vacío, torque de tapa, resistencia a la compresión y
+                caída libre.</p>
+            </div>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+              <i data-lucide="gauge" class="w-8 h-8 text-brand-600 mb-2"></i>
+              <h4 class="font-bold text-slate-900 text-sm">Monitoreo Térmico Digital</h4>
+              <p class="text-xs text-slate-500 mt-1">Control exacto de perfiles de temperatura y tiempos de enfriamiento
+                en molde.</p>
+            </div>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+              <i data-lucide="recycle" class="w-8 h-8 text-brand-600 mb-2"></i>
+              <h4 class="font-bold text-slate-900 text-sm">Compromiso Sustentable</h4>
+              <p class="text-xs text-slate-500 mt-1">Líneas preparadas para incorporar hasta 50% de resina reciclada
+                post-consumo (PCR).</p>
+            </div>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+              <i data-lucide="clock" class="w-8 h-8 text-brand-600 mb-2"></i>
+              <h4 class="font-bold text-slate-900 text-sm">Operación Continua 24/7</h4>
+              <p class="text-xs text-slate-500 mt-1">Turnos rotativos continuos para garantizar entregas puntuales en
+                picos de demanda.</p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-gradient-to-tr from-brand-900 to-slate-900 rounded-3xl p-10 text-white relative overflow-hidden shadow-2xl">
+          <div class="relative z-10 space-y-6">
+            <h3 class="text-2xl font-bold font-display text-white">¿Tienes un nuevo producto en mente?</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Te asesoramos sin costo en la selección de la resina ideal (flexibilidad, resistencia a solventes,
+              transparencia o impacto) y calculamos la rentabilidad del molde según tu volumen estimado.
+            </p>
+            <div class="p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 space-y-3">
+              <div class="flex items-center justify-between text-xs font-semibold">
+                <span>1. Conceptualización & Boceto 3D</span>
+                <span class="text-emerald-400">Paso 1</span>
+              </div>
+              <div class="flex items-center justify-between text-xs font-semibold">
+                <span>2. Prototipo Funcional & Aprobación</span>
+                <span class="text-emerald-400">Paso 2</span>
+              </div>
+              <div class="flex items-center justify-between text-xs font-semibold">
+                <span>3. Fabricación del Molde & Pruebas T1</span>
+                <span class="text-emerald-400">Paso 3</span>
+              </div>
+              <div class="flex items-center justify-between text-xs font-semibold">
+                <span>4. Producción en Serie & Entrega</span>
+                <span class="text-emerald-400">Paso 4</span>
+              </div>
+            </div>
+            <a href="https://wa.me/573000000000?text=Hola,%20quisiera%20asesoría%20para%20un%20proyecto%20de%20plásticos"
+              target="_blank"
+              class="w-full inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-lg shadow-emerald-500/30">
+              <i data-lucide="message-circle" class="w-5 h-5"></i>
+              Hablar con un Ingeniero por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN: COTIZADOR / FORMULARIO RFQ -->
+  <section id="cotizador" class="py-20 bg-slate-900 text-white relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span
+          class="text-xs font-extrabold uppercase tracking-widest text-brand-400 bg-brand-950 px-3 py-1 rounded-full border border-brand-800">
+          Atención Comercial B2B
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-display mt-3">
+          Solicitud de Cotización Inmediata
+        </h2>
+        <p class="text-slate-400 text-sm mt-2">
+          Completa los datos de tu requerimiento y nuestro equipo técnico te responderá con una propuesta comercial y
+          técnica formal en menos de 24 horas.
+        </p>
+      </div>
+
+      <div class="bg-slate-800/90 rounded-3xl p-8 sm:p-10 border border-slate-700 shadow-2xl backdrop-blur-md">
+        <form id="rfq-form" class="space-y-6">
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Nombre o Empresa *</label>
+              <input type="text" id="rfq-name" required placeholder="Ej. Laboratorios SAS"
+                class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Correo Electrónico *</label>
+              <input type="email" id="rfq-email" required placeholder="contacto@empresa.com"
+                class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition">
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Teléfono / WhatsApp *</label>
+              <input type="tel" id="rfq-phone" required placeholder="+57 300 000 0000"
+                class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Tipo de Proceso</label>
+              <select id="rfq-process"
+                class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition">
+                <option value="Soplado de Envases">Soplado de Envases / Botellas</option>
+                <option value="Inyección de Piezas">Inyección de Piezas Técnicas / Tapas</option>
+                <option value="Fabricación de Molde Nuevo">Diseño y Fabricación de Molde Nuevo</option>
+                <option value="Maquila con Molde Propio">Servicio de Maquila (Tengo mi propio molde)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Volumen Estimado Mensual</label>
+              <select id="rfq-volume"
+                class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition">
+                <option value="5.000 a 20.000 unidades">5.000 a 20.000 unidades</option>
+                <option value="20.000 a 50.000 unidades">20.000 a 50.000 unidades</option>
+                <option value="50.000 a 100.000 unidades">50.000 a 100.000 unidades</option>
+                <option value="Más de 100.000 unidades">+100.000 unidades (Gran Escala)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Material / Resina Preferida</label>
+              <select id="rfq-material"
+                class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition">
+                <option value="Polietileno de Alta Densidad (PEAD)">Polietileno de Alta Densidad (PEAD)</option>
+                <option value="PET (Polietileno Tereftalato)">PET (Polietileno Tereftalato)</option>
+                <option value="Polipropileno (PP)">Polipropileno (PP)</option>
+                <option value="Resina Reciclada (PCR)">Resina Reciclada Sostenible (PCR)</option>
+                <option value="Asesorarme en el material">Requiero asesoría técnica</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Detalles del Requerimiento o
+              Especificaciones</label>
+            <textarea id="rfq-details" rows="3"
+              placeholder="Describe dimensiones, capacidad en ml/litros, peso objetivo, tipo de rosca o si cuentas con plano 3D/muestra física."
+              class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition"></textarea>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4 pt-2">
+            <button type="submit"
+              class="flex-1 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center justify-center gap-2">
+              <i data-lucide="send" class="w-4 h-4"></i>
+              Enviar Solicitud de Cotización
+            </button>
+            <button type="button" id="btn-whatsapp-direct"
+              class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl transition flex items-center justify-center gap-2">
+              <i data-lucide="message-circle" class="w-4 h-4"></i>
+              Cotizar por WhatsApp
+            </button>
+          </div>
+          <div id="form-feedback" class="hidden text-center text-xs font-bold py-2 text-emerald-400">
+            ¡Mensaje preparado con éxito! Abriendo canal comercial...
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white">
+              <i data-lucide="layers" class="w-4 h-4"></i>
+            </div>
+            <span class="text-lg font-bold font-display text-white">PLASTI<span
+                class="text-brand-500">CORP</span></span>
+          </div>
+          <p class="text-slate-500 leading-relaxed">
+            Líderes en transformación de resinas plásticas industriales. Inyección de precisión, soplado de envases y
+            desarrollo de moldes a medida.
+          </p>
+        </div>
+
+        <div>
+          <h5 class="text-white font-bold uppercase tracking-wider mb-3">Procesos</h5>
+          <ul class="space-y-2">
+            <li><a href="#servicios" class="hover:text-white transition">Inyección de Termoplásticos</a></li>
+            <li><a href="#servicios" class="hover:text-white transition">Soplado de Botellas y Galones</a></li>
+            <li><a href="#servicios" class="hover:text-white transition">Diseño y Fabricación de Moldes</a></li>
+            <li><a href="#servicios" class="hover:text-white transition">Servicios de Maquila Industrial</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="text-white font-bold uppercase tracking-wider mb-3">Sectores</h5>
+          <ul class="space-y-2">
+            <li><a href="#catalogo" class="hover:text-white transition">Línea Farmacéutica y Cosmética</a></li>
+            <li><a href="#catalogo" class="hover:text-white transition">Línea Química y Limpieza</a></li>
+            <li><a href="#catalogo" class="hover:text-white transition">Línea Alimentos y Bebidas</a></li>
+            <li><a href="#catalogo" class="hover:text-white transition">Agroquímicos e Industria Pesada</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="text-white font-bold uppercase tracking-wider mb-3">Contacto Directo</h5>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-brand-500"></i> Zona
+              Industrial, Planta de Producción</li>
+            <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-brand-500"></i> +57 (601) 000
+              0000</li>
+            <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-brand-500"></i>
+              ventas@tuempresa.com</li>
+            <li class="flex items-center gap-2 text-emerald-400 font-bold"><i data-lucide="clock" class="w-4 h-4"></i>
+              Lunes a Viernes 7:00 AM - 5:00 PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="pt-8 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-slate-500">
+        <p>&copy; 2026 Todos los derechos reservados. Industria de Plásticos por Inyección y Soplado.</p>
+        <p class="flex items-center gap-1">Diseñado para alto rendimiento y despliegue en Hostinger.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts Funcionales -->
+  <script>
+    // Inicializar Iconos Lucide
+    lucide.createIcons();
+
+    // Toggle Menú Móvil
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Filtros de Catálogo
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('active', 'bg-brand-600', 'text-white');
+          b.classList.add('bg-white', 'text-slate-700');
+        });
+        btn.classList.add('active', 'bg-brand-600', 'text-white');
+        btn.classList.remove('bg-white', 'text-slate-700');
+
+        const filter = btn.getAttribute('data-filter');
+        productCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Formulario de Cotización -> Formato WhatsApp / Correo
+    const rfqForm = document.getElementById('rfq-form');
+    const btnWhatsapp = document.getElementById('btn-whatsapp-direct');
+
+    function buildMessage() {
+      const name = document.getElementById('rfq-name').value || 'Cliente';
+      const email = document.getElementById('rfq-email').value || 'No indicado';
+      const phone = document.getElementById('rfq-phone').value || 'No indicado';
+      const processType = document.getElementById('rfq-process').value;
+      const volume = document.getElementById('rfq-volume').value;
+      const material = document.getElementById('rfq-material').value;
+      const details = document.getElementById('rfq-details').value || 'Sin detalles adicionales';
+
+      return `Hola MERYPLAST, me interesa cotizar:\n` +
+        `*Empresa / Nombre:* ${name}\n` +
+        `*Correo:* ${email}\n` +
+        `*Teléfono:* ${phone}\n` +
+        `*Proceso:* ${processType}\n` +
+        `*Volumen:* ${volume}\n` +
+        `*Material:* ${material}\n` +
+        `*Detalles:* ${details}`;
+    }
+
+    rfqForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = encodeURIComponent(buildMessage());
+      const whatsappUrl = `https://wa.me/573000000000?text=${text}`;
+      window.open(whatsappUrl, '_blank');
+      document.getElementById('form-feedback').classList.remove('hidden');
+    });
+
+    btnWhatsapp.addEventListener('click', () => {
+      const text = encodeURIComponent(buildMessage());
+      const whatsappUrl = `https://wa.me/573000000000?text=${text}`;
+      window.open(whatsappUrl, '_blank');
+    });
+  </script>
+</body>
+
+</html>
