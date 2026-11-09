@@ -7,3 +7,4 @@ Sitio web corporativo y catálogo digital para MERYPLAST. Especialistas en inyec
 - `assets/`: Logotipos e identidad visual corporativa.
 
 Desarrollado para despliegue automatizado en Hostinger.
+

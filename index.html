@@ -7,6 +7,9 @@
   <title>Soluciones en Inyección y Soplado de Plásticos | Fabricación Industrial y Envases</title>
   <meta name="description"
     content="Especialistas en inyección de piezas técnicas y soplado de envases plásticos de alta precisión (PEAD, PET, PP). Desarrollo de moldes, matricería y producción masiva para la industria cosmética, farmacéutica, química y alimentaria.">
+    <!-- Three.js 3D Engine & Orbit Controls -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <!-- Tailwind CSS CDN con configuración -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
@@ -98,7 +101,10 @@
         <!-- Menú de Navegación Desktop -->
         <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
           <a href="#servicios" class="hover:text-brand-600 transition">Procesos & Servicios</a>
-          <a href="#catalogo" class="hover:text-brand-600 transition">Catálogo de Productos</a>
+          <a href="#configurador3d" class="flex items-center gap-1.5 text-emerald-600 hover:text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 transition font-bold text-xs shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Estudio 3D
+        </a>
+        <a href="#catalogo" class="hover:text-brand-600 transition">Catálogo de Productos</a>
           <a href="#maquinaria" class="hover:text-brand-600 transition">Capacidad Técnica</a>
           <a href="#nosotros" class="hover:text-brand-600 transition">Sobre Nosotros</a>
           <a href="#cotizador" class="hover:text-brand-600 transition">Cotizador</a>
@@ -342,6 +348,190 @@
     </div>
   </section>
 
+  
+  <!-- SECCIÓN: ESTUDIO & CONFIGURADOR 3D INTERACTIVO -->
+  <section id="configurador3d" class="py-20 bg-slate-950 text-white relative overflow-hidden border-t border-slate-800">
+    <!-- Luces de fondo decorativas -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950/80 px-3.5 py-1.5 rounded-full border border-emerald-500/30">
+          Tecnología de Previsualización MERYPLAST
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold font-display text-white mt-4 tracking-tight">
+          Estudio 3D Interactivo de Envases
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-3">
+          Personaliza tu producto en tiempo real: gira en 360°, prueba resinas plásticas (PET, PEAD, PP), cambia el color del envase y tapa, y <strong>sube tu propio logo o etiqueta</strong> para ver el resultado final antes de ordenar el molde.
+        </p>
+      </div>
+
+      <!-- Contenedor del Visor 3D + Panel de Control -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-slate-900/90 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl">
+        
+        <!-- VISOR 3D (7 Columnas) -->
+        <div class="lg:col-span-7 relative min-h-[460px] md:min-h-[580px] bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 flex flex-col items-center justify-center p-4">
+          
+          <!-- Canvas 3D -->
+          <div id="canvas-3d-main" class="w-full h-full absolute inset-0 cursor-grab active:cursor-grabbing"></div>
+
+          <!-- Indicador de Rotación 360 -->
+          <div class="absolute top-4 left-4 z-10 bg-slate-900/80 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-700/60 flex items-center gap-2 text-xs text-slate-300 shadow-md">
+            <i data-lucide="rotate-3d" class="w-4 h-4 text-cyan-400 animate-spin" style="animation-duration: 8s;"></i>
+            <span>Arrastra para rotar 360° • Zoom con rueda</span>
+          </div>
+
+          <!-- Botones Flotantes en el Visor -->
+          <div class="absolute bottom-4 left-4 right-4 z-10 flex flex-wrap justify-between items-center gap-2">
+            <div class="flex gap-2">
+              <button id="btn-reset-cam-main" class="bg-slate-800/90 hover:bg-slate-700 text-xs px-3.5 py-2 rounded-xl border border-slate-700 text-slate-200 flex items-center gap-1.5 transition shadow">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Vista Inicial
+              </button>
+              <button id="btn-toggle-auto-main" class="bg-slate-800/90 hover:bg-slate-700 text-xs px-3.5 py-2 rounded-xl border border-slate-700 text-slate-200 flex items-center gap-1.5 transition shadow">
+                <i data-lucide="play" class="w-3.5 h-3.5"></i> Giro Auto
+              </button>
+            </div>
+            <button id="btn-screenshot-main" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg shadow-cyan-950/60 flex items-center gap-1.5 transition">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i> Descargar Muestra 3D
+            </button>
+          </div>
+
+        </div>
+
+        <!-- PANEL DE PERSONALIZACIÓN (5 Columnas) -->
+        <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-6 bg-slate-900/60 border-t lg:border-t-0 lg:border-l border-slate-800/80">
+          
+          <div class="space-y-6 overflow-y-auto max-h-[520px] pr-2">
+            
+            <!-- 1. SELECCIONAR MODELO -->
+            <div>
+              <div class="flex justify-between items-center mb-2.5">
+                <label class="text-xs font-extrabold uppercase tracking-wider text-slate-400">
+                  1. Modelo de Envase
+                </label>
+                <span id="model-capacity-label" class="text-xs font-semibold text-cyan-400">Capacidad: 500 ml</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2.5">
+                <button class="model-picker-btn active p-3 rounded-2xl border border-emerald-500 bg-emerald-950/50 text-emerald-300 text-xs font-bold text-center transition flex flex-col items-center gap-1.5" data-model="boston">
+                  <i data-lucide="cylinder" class="w-5 h-5"></i>
+                  <span>Boston 500ml</span>
+                </button>
+                <button class="model-picker-btn p-3 rounded-2xl border border-slate-800 bg-slate-800/50 hover:bg-slate-800 text-slate-300 text-xs font-bold text-center transition flex flex-col items-center gap-1.5" data-model="cilindro">
+                  <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                  <span>Cilindro 250ml</span>
+                </button>
+                <button class="model-picker-btn p-3 rounded-2xl border border-slate-800 bg-slate-800/50 hover:bg-slate-800 text-slate-300 text-xs font-bold text-center transition flex flex-col items-center gap-1.5" data-model="tarro">
+                  <i data-lucide="archive" class="w-5 h-5"></i>
+                  <span>Tarro Boca Ancha</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. MATERIAL DEL PLÁSTICO -->
+            <div>
+              <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2.5">
+                2. Resina y Acabado Físico
+              </label>
+              <div class="grid grid-cols-3 gap-2.5">
+                <button class="mat-picker-btn active p-2.5 rounded-xl border border-cyan-500 bg-cyan-950/50 text-cyan-300 text-xs font-bold text-center transition" data-mat="pet">
+                  PET Cristal
+                </button>
+                <button class="mat-picker-btn p-2.5 rounded-xl border border-slate-800 bg-slate-800/50 hover:bg-slate-800 text-slate-300 text-xs font-bold text-center transition" data-mat="pead">
+                  PEAD Satinado
+                </button>
+                <button class="mat-picker-btn p-2.5 rounded-xl border border-slate-800 bg-slate-800/50 hover:bg-slate-800 text-slate-300 text-xs font-bold text-center transition" data-mat="opaco">
+                  PP Brillo
+                </button>
+              </div>
+            </div>
+
+            <!-- 3. COLOR DEL ENVASE -->
+            <div>
+              <div class="flex justify-between items-center mb-2.5">
+                <label class="text-xs font-extrabold uppercase tracking-wider text-slate-400">
+                  3. Color del Envase
+                </label>
+                <span id="color-label-main" class="text-xs font-bold text-emerald-400">Verde Esmeralda MERYPLAST</span>
+              </div>
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-white shadow-md transition transform hover:scale-110" style="background-color: #009B5A;" data-color="#009B5A" data-name="Verde Esmeralda MERYPLAST" title="Verde Esmeralda"></button>
+                <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-slate-400 shadow-md transition transform hover:scale-110" style="background-color: #00A3E0;" data-color="#00A3E0" data-name="Cian Corporativo" title="Cian"></button>
+                <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-slate-400 shadow-md transition transform hover:scale-110" style="background-color: #1a4480;" data-color="#1a4480" data-name="Azul Cobalto" title="Azul Cobalto"></button>
+                <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-slate-400 shadow-md transition transform hover:scale-110" style="background-color: #8c4c16;" data-color="#8c4c16" data-name="Ámbar Farmacéutico" title="Ámbar"></button>
+                <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-slate-400 shadow-md transition transform hover:scale-110" style="background-color: #ffffff;" data-color="#ffffff" data-name="Blanco Nieve" title="Blanco"></button>
+                <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-slate-400 shadow-md transition transform hover:scale-110" style="background-color: #111111;" data-color="#111111" data-name="Negro Premium" title="Negro"></button>
+                
+                <div class="relative flex items-center ml-1" title="Color personalizado libre">
+                  <input type="color" id="custom-color-input-main" value="#009B5A" class="w-8 h-8 rounded-full border border-slate-700 cursor-pointer bg-transparent">
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. CIERRE / TAPA -->
+            <div>
+              <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2.5">
+                4. Tipo y Color de Tapa
+              </label>
+              <div class="grid grid-cols-2 gap-2.5 mb-2.5">
+                <button class="cap-picker-btn active p-2.5 rounded-xl border border-slate-700 bg-slate-800 text-xs font-bold text-slate-200 transition text-center" data-cap="rosca">
+                  Tapa Rosca Estriada
+                </button>
+                <button class="cap-picker-btn p-2.5 rounded-xl border border-slate-800 bg-slate-800/50 text-xs font-bold text-slate-400 transition text-center" data-cap="fliptop">
+                  Tapa Flip-Top
+                </button>
+              </div>
+              <div class="flex items-center gap-2 text-xs">
+                <span class="text-slate-400">Color:</span>
+                <button class="cap-color-picker-swatch w-5 h-5 rounded-full border border-white" style="background-color: #ffffff;" data-color="#ffffff" title="Blanco"></button>
+                <button class="cap-color-picker-swatch w-5 h-5 rounded-full border border-slate-700" style="background-color: #111111;" data-color="#111111" title="Negro"></button>
+                <button class="cap-color-picker-swatch w-5 h-5 rounded-full border border-slate-700" style="background-color: #00A3E0;" data-color="#00A3E0" title="Cian"></button>
+                <button class="cap-color-picker-swatch w-5 h-5 rounded-full border border-slate-700" style="background-color: #009B5A;" data-color="#009B5A" title="Verde"></button>
+              </div>
+            </div>
+
+            <!-- 5. SUBIR LOGO / ETIQUETA EN VIVO -->
+            <div class="bg-slate-950/70 p-4 rounded-2xl border border-slate-800">
+              <label class="block text-xs font-extrabold uppercase tracking-wider text-cyan-400 mb-1 flex items-center justify-between">
+                <span>5. Sube tu Logo o Etiqueta Propia</span>
+                <span class="text-[10px] text-slate-400 font-normal">PNG / JPG</span>
+              </label>
+              <p class="text-[11px] text-slate-400 mb-3">
+                Comprueba al instante cómo destacará la marca de tu empresa sobre el envase de plástico soplado.
+              </p>
+              <div class="flex items-center gap-2">
+                <input type="file" id="logo-input-main" accept="image/*" class="hidden">
+                <button onclick="document.getElementById('logo-input-main').click()" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-200 px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition">
+                  <i data-lucide="upload" class="w-3.5 h-3.5 text-cyan-400"></i> Seleccionar Imagen
+                </button>
+                <button id="btn-remove-logo-main" class="hidden text-xs text-rose-400 hover:text-rose-300 px-2 py-1 font-semibold">
+                  Quitar Logo
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- BOTÓN COTIZAR DISEÑO -->
+          <div class="pt-4 border-t border-slate-800">
+            <a id="btn-quote-whatsapp-main" href="https://wa.me/573134704002" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-4 px-4 rounded-2xl shadow-xl shadow-emerald-950/60 flex items-center justify-center gap-2.5 text-sm transition transform hover:-translate-y-0.5">
+              <i data-lucide="message-circle" class="w-5 h-5"></i>
+              <span>Cotizar este Diseño en WhatsApp</span>
+            </a>
+            <p class="text-[11px] text-center text-slate-400 mt-2">
+              Atención directa de <strong>Emir Joel Peña (Ejecutivo de Ventas)</strong> con cotización oficial y tiempos de fabricación.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
   <!-- SECCIÓN: CATÁLOGO DE PRODUCTOS -->
   <section id="catalogo" class="py-20 bg-slate-100 border-y border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -377,101 +567,209 @@
       </div>
 
       <!-- Grid de Productos -->
+      <!-- Grid de Productos Reales MERYPLAST -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="productos-grid">
+        
         <!-- Producto 1 -->
-        <div
-          class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition"
-          data-category="envases">
-          <div class="h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100 relative">
-            <span
-              class="absolute top-3 left-3 bg-brand-50 text-brand-700 text-[10px] font-extrabold px-2 py-0.5 rounded border border-brand-200">Soplado
-              PET</span>
-            <i data-lucide="flask-conical" class="w-20 h-20 text-brand-500/80"></i>
+        <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
+          <div>
+            <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
+              <span class="absolute top-3 left-3 z-10 bg-emerald-500/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado PET</span>
+              <img src="assets/productos/prod_01.jpg" alt="Botella Cilíndrica Boston 500ml" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-5">
+              <span class="text-xs text-slate-400 font-semibold">Cosmético / Farma</span>
+              <h4 class="font-bold text-slate-900 text-base mt-1">Botella Cilíndrica Boston</h4>
+              <p class="text-xs text-slate-500 mt-1">Capacidad: 500ml. Rosca 28/410 estándar. Excelente resistencia y transparencia cristalina.</p>
+            </div>
           </div>
-          <div class="p-5">
-            <span class="text-xs text-slate-400 font-semibold">Cosmético / Farmacéutico</span>
-            <h4 class="font-bold text-slate-900 text-base mt-1">Botella Cilíndrica Boston</h4>
-            <p class="text-xs text-slate-500 mt-1">Capacidades: 120ml, 250ml, 500ml y 1000ml. Rosca 28/410 estándar.</p>
-            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-700">Material: PET 100% Virgen</span>
-              <a href="#cotizador"
-                class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">Cotizar <i
-                  data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+          <div class="p-5 pt-0">
+            <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+              <a href="#configurador3d" onclick="select3DModel('boston', '#009B5A')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+                <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
+              </a>
+              <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20la%20Botella%20Cil%C3%ADndrica%20Boston%20500ml" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
+                Cotizar <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </a>
             </div>
           </div>
         </div>
 
         <!-- Producto 2 -->
-        <div
-          class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition"
-          data-category="galones">
-          <div class="h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100 relative">
-            <span
-              class="absolute top-3 left-3 bg-cyan-50 text-cyan-700 text-[10px] font-extrabold px-2 py-0.5 rounded border border-cyan-200">Soplado
-              PEAD</span>
-            <i data-lucide="box" class="w-20 h-20 text-cyan-600/80"></i>
+        <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
+          <div>
+            <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
+              <span class="absolute top-3 left-3 z-10 bg-cyan-600/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado PEAD</span>
+              <img src="assets/productos/prod_02.jpg" alt="Envase Alto Cilíndrico" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-5">
+              <span class="text-xs text-slate-400 font-semibold">Cuidado Personal / Químico</span>
+              <h4 class="font-bold text-slate-900 text-base mt-1">Envase Alto Esbelto</h4>
+              <p class="text-xs text-slate-500 mt-1">Capacidad: 400ml / 500ml. Rosca 24/410. Diseño estilizado para estantería y retail.</p>
+            </div>
           </div>
-          <div class="p-5">
-            <span class="text-xs text-slate-400 font-semibold">Químico / Aseo Industrial</span>
-            <h4 class="font-bold text-slate-900 text-base mt-1">Galón Apilable 4 Litros</h4>
-            <p class="text-xs text-slate-500 mt-1">Manija ergonómica reforzada, alta resistencia al apilamiento en
-              estibas.</p>
-            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-700">Material: PEAD / Visor</span>
-              <a href="#cotizador"
-                class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">Cotizar <i
-                  data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+          <div class="p-5 pt-0">
+            <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+              <a href="#configurador3d" onclick="select3DModel('cilindro', '#00A3E0')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+                <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
+              </a>
+              <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20el%20Envase%20Alto%20Esbelto" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
+                Cotizar <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </a>
             </div>
           </div>
         </div>
 
         <!-- Producto 3 -->
-        <div
-          class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition"
-          data-category="galones">
-          <div class="h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100 relative">
-            <span
-              class="absolute top-3 left-3 bg-amber-50 text-amber-700 text-[10px] font-extrabold px-2 py-0.5 rounded border border-amber-200">Soplado
-              Pesado</span>
-            <i data-lucide="container" class="w-20 h-20 text-amber-600/80"></i>
+        <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
+          <div>
+            <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
+              <span class="absolute top-3 left-3 z-10 bg-purple-600/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Inyección / Soplado</span>
+              <img src="assets/productos/prod_03.jpg" alt="Tarro Boca Ancha Cosmético" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-5">
+              <span class="text-xs text-slate-400 font-semibold">Cosmético / Pomadas / Alimentos</span>
+              <h4 class="font-bold text-slate-900 text-base mt-1">Tarro Boca Ancha con Tapa</h4>
+              <p class="text-xs text-slate-500 mt-1">Capacidad: 250g / 500g. Fácil llenado y sellado hermético para cremas y geles.</p>
+            </div>
           </div>
-          <div class="p-5">
-            <span class="text-xs text-slate-400 font-semibold">Agroquímica / Lubricantes</span>
-            <h4 class="font-bold text-slate-900 text-base mt-1">Bidón Caneca 20 Litros</h4>
-            <p class="text-xs text-slate-500 mt-1">Tapa rosca con precinto de seguridad y tapón de venteo anti-presión.
-            </p>
-            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-700">Material: PEAD Alta Densidad</span>
-              <a href="#cotizador"
-                class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">Cotizar <i
-                  data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+          <div class="p-5 pt-0">
+            <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+              <a href="#configurador3d" onclick="select3DModel('tarro', '#ffffff')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+                <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
+              </a>
+              <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20el%20Tarro%20Boca%20Ancha" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
+                Cotizar <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </a>
             </div>
           </div>
         </div>
 
         <!-- Producto 4 -->
-        <div
-          class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition"
-          data-category="tapas">
-          <div class="h-48 bg-slate-50 flex items-center justify-center p-6 border-b border-slate-100 relative">
-            <span
-              class="absolute top-3 left-3 bg-purple-50 text-purple-700 text-[10px] font-extrabold px-2 py-0.5 rounded border border-purple-200">Inyección
-              PP</span>
-            <i data-lucide="disc" class="w-20 h-20 text-purple-600/80"></i>
+        <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
+          <div>
+            <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
+              <span class="absolute top-3 left-3 z-10 bg-emerald-500/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado PET</span>
+              <img src="assets/productos/prod_04.jpg" alt="Botella Boston 250ml" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-5">
+              <span class="text-xs text-slate-400 font-semibold">Higiene / Hotelería / Capilar</span>
+              <h4 class="font-bold text-slate-900 text-base mt-1">Botella Cilíndrica 250ml</h4>
+              <p class="text-xs text-slate-500 mt-1">Capacidad: 250ml. Compatible con tapa flip-top, disco dosificador y atomizador.</p>
+            </div>
           </div>
-          <div class="p-5">
-            <span class="text-xs text-slate-400 font-semibold">Alimentos / Cosméticos</span>
-            <h4 class="font-bold text-slate-900 text-base mt-1">Tapa Flip-Top & Dosificadora</h4>
-            <p class="text-xs text-slate-500 mt-1">Roscas 24/410, 28/400 y 38mm. Sistema anti-goteo y cierre hermético.
-            </p>
-            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-700">Material: PP Homopolímero</span>
-              <a href="#cotizador"
-                class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">Cotizar <i
-                  data-lucide="chevron-right" class="w-3.5 h-3.5"></i></a>
+          <div class="p-5 pt-0">
+            <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+              <a href="#configurador3d" onclick="select3DModel('cilindro', '#009B5A')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+                <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
+              </a>
+              <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20la%20Botella%20250ml" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
+                Cotizar <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </a>
             </div>
           </div>
         </div>
+
+        <!-- Producto 5 -->
+        <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
+          <div>
+            <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
+              <span class="absolute top-3 left-3 z-10 bg-cyan-600/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado PEAD</span>
+              <img src="assets/productos/prod_05.jpg" alt="Envase Cilíndrico Translúcido" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-5">
+              <span class="text-xs text-slate-400 font-semibold">Laboratorio / Químico</span>
+              <h4 class="font-bold text-slate-900 text-base mt-1">Envase Translúcido 500ml</h4>
+              <p class="text-xs text-slate-500 mt-1">Fabricado en polietileno de alta densidad. Alta resistencia a solventes y ácidos.</p>
+            </div>
+          </div>
+          <div class="p-5 pt-0">
+            <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+              <a href="#configurador3d" onclick="select3DModel('boston', '#ffffff')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+                <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
+              </a>
+              <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20el%20Envase%20Transl%C3%BAcido%20500ml" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
+                Cotizar <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 6 -->
+        <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
+          <div>
+            <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
+              <span class="absolute top-3 left-3 z-10 bg-amber-500/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Línea Farma</span>
+              <img src="assets/productos/prod_06.jpg" alt="Botella Gotero Farmacéutica" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-5">
+              <span class="text-xs text-slate-400 font-semibold">Farmacéutico / Esencias</span>
+              <h4 class="font-bold text-slate-900 text-base mt-1">Botella Gotero 60ml / 120ml</h4>
+              <p class="text-xs text-slate-500 mt-1">Color ámbar protector UV o transparente. Rosca con precinto de inviolabilidad.</p>
+            </div>
+          </div>
+          <div class="p-5 pt-0">
+            <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+              <a href="#configurador3d" onclick="select3DModel('cilindro', '#8c4c16')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+                <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
+              </a>
+              <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20la%20Botella%20Gotero" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
+                Cotizar <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 7 -->
+        <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
+          <div>
+            <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
+              <span class="absolute top-3 left-3 z-10 bg-cyan-600/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado Técnico</span>
+              <img src="assets/productos/prod_07.jpg" alt="Frasco Químico Cuello Reforzado" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-5">
+              <span class="text-xs text-slate-400 font-semibold">Agroquímica / Reactivos</span>
+              <h4 class="font-bold text-slate-900 text-base mt-1">Frasco Cuello Reforzado 250ml</h4>
+              <p class="text-xs text-slate-500 mt-1">Paredes de alto calibre para evitar colapso por presión barométrica o gases.</p>
+            </div>
+          </div>
+          <div class="p-5 pt-0">
+            <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+              <a href="#configurador3d" onclick="select3DModel('boston', '#ffffff')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+                <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
+              </a>
+              <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20el%20Frasco%20Cuello%20Reforzado" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
+                Cotizar <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 8 -->
+        <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
+          <div>
+            <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
+              <span class="absolute top-3 left-3 z-10 bg-emerald-500/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Línea Premium</span>
+              <img src="assets/productos/prod_08.jpg" alt="Envase Ergonómico" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-5">
+              <span class="text-xs text-slate-400 font-semibold">Cosmética / Salones</span>
+              <h4 class="font-bold text-slate-900 text-base mt-1">Envase Ergonómico 500ml</h4>
+              <p class="text-xs text-slate-500 mt-1">Agarre antideslizante con acabado soft-touch opcional y rosca dosificadora.</p>
+            </div>
+          </div>
+          <div class="p-5 pt-0">
+            <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
+              <a href="#configurador3d" onclick="select3DModel('boston', '#009B5A')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+                <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
+              </a>
+              <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20el%20Envase%20Ergon%C3%B3mico%20500ml" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
+                Cotizar <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -795,6 +1093,420 @@
       window.open(whatsappUrl, '_blank');
     });
   </script>
+
+  <!-- 3D CONFIGURATOR SCRIPT -->
+  <script>
+    (function init3DStudio() {
+      const container = document.getElementById('canvas-3d-main');
+      if (!container) return;
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x0a0f1d);
+
+      const camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 100);
+      camera.position.set(0, 0.8, 4.2);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.15;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      container.appendChild(renderer.domElement);
+
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.minDistance = 2.0;
+      controls.maxDistance = 7.0;
+      controls.maxPolarAngle = Math.PI / 2 + 0.1;
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 1.4;
+
+      // Luces de Estudio PBR
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+      scene.add(ambientLight);
+
+      const keyLight = new THREE.DirectionalLight(0xffffff, 1.25);
+      keyLight.position.set(4, 6, 4);
+      keyLight.castShadow = true;
+      keyLight.shadow.mapSize.width = 1024;
+      keyLight.shadow.mapSize.height = 1024;
+      scene.add(keyLight);
+
+      const fillLight = new THREE.DirectionalLight(0x7dd3fc, 0.75);
+      fillLight.position.set(-4, 3, 3);
+      scene.add(fillLight);
+
+      const rimLight = new THREE.DirectionalLight(0x34d399, 1.0);
+      rimLight.position.set(0, 5, -4);
+      scene.add(rimLight);
+
+      // Suelo con sombra de contacto suave
+      const floorGeo = new THREE.PlaneGeometry(12, 12);
+      const floorMat = new THREE.ShadowMaterial({ opacity: 0.28 });
+      const floor = new THREE.Mesh(floorGeo, floorMat);
+      floor.rotation.x = -Math.PI / 2;
+      floor.position.y = -1.1;
+      floor.receiveShadow = true;
+      scene.add(floor);
+
+      const pedestalGeo = new THREE.CylinderGeometry(1.4, 1.5, 0.04, 48);
+      const pedestalMat = new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.8, metalness: 0.1 });
+      const pedestal = new THREE.Mesh(pedestalGeo, pedestalMat);
+      pedestal.position.y = -1.12;
+      pedestal.receiveShadow = true;
+      scene.add(pedestal);
+
+      const bottleGroup = new THREE.Group();
+      scene.add(bottleGroup);
+
+      let currentModel = 'boston';
+      let currentMatType = 'pet';
+      let currentColor = '#009B5A';
+      let currentCapType = 'rosca';
+      let currentCapColor = '#ffffff';
+
+      let bodyMesh = null;
+      let capMesh = null;
+      let labelMesh = null;
+      let uploadedTexture = null;
+
+      function getBottlePoints(type) {
+        const points = [];
+        if (type === 'boston') {
+          points.push(new THREE.Vector2(0, -1.0));
+          points.push(new THREE.Vector2(0.55, -0.98));
+          points.push(new THREE.Vector2(0.62, -0.9));
+          points.push(new THREE.Vector2(0.62, 0.3));
+          points.push(new THREE.Vector2(0.58, 0.5));
+          points.push(new THREE.Vector2(0.45, 0.68));
+          points.push(new THREE.Vector2(0.28, 0.8));
+          points.push(new THREE.Vector2(0.22, 0.86));
+          points.push(new THREE.Vector2(0.22, 1.1));
+          points.push(new THREE.Vector2(0.24, 1.12));
+          points.push(new THREE.Vector2(0.22, 1.15));
+          points.push(new THREE.Vector2(0.18, 1.15));
+        } else if (type === 'cilindro') {
+          points.push(new THREE.Vector2(0, -1.0));
+          points.push(new THREE.Vector2(0.44, -0.98));
+          points.push(new THREE.Vector2(0.46, -0.92));
+          points.push(new THREE.Vector2(0.46, 0.6));
+          points.push(new THREE.Vector2(0.42, 0.72));
+          points.push(new THREE.Vector2(0.24, 0.8));
+          points.push(new THREE.Vector2(0.20, 0.86));
+          points.push(new THREE.Vector2(0.20, 1.12));
+          points.push(new THREE.Vector2(0.16, 1.12));
+        } else if (type === 'tarro') {
+          points.push(new THREE.Vector2(0, -0.7));
+          points.push(new THREE.Vector2(0.72, -0.68));
+          points.push(new THREE.Vector2(0.78, -0.62));
+          points.push(new THREE.Vector2(0.78, 0.3));
+          points.push(new THREE.Vector2(0.74, 0.38));
+          points.push(new THREE.Vector2(0.68, 0.42));
+          points.push(new THREE.Vector2(0.68, 0.55));
+          points.push(new THREE.Vector2(0.62, 0.55));
+        }
+        return points;
+      }
+
+      function createPlasticMaterial(matType, hexColor) {
+        const col = new THREE.Color(hexColor);
+        if (matType === 'pet') {
+          return new THREE.MeshPhysicalMaterial({
+            color: col,
+            metalness: 0.02,
+            roughness: 0.06,
+            transmission: 0.90,
+            ior: 1.57,
+            reflectivity: 0.85,
+            thickness: 0.6,
+            transparent: true,
+            opacity: 0.88,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.05
+          });
+        } else if (matType === 'pead') {
+          return new THREE.MeshPhysicalMaterial({
+            color: col,
+            metalness: 0.0,
+            roughness: 0.32,
+            transmission: 0.42,
+            thickness: 0.8,
+            transparent: true,
+            opacity: 0.94,
+            clearcoat: 0.3,
+            clearcoatRoughness: 0.3
+          });
+        } else {
+          return new THREE.MeshStandardMaterial({
+            color: col,
+            roughness: 0.18,
+            metalness: 0.05
+          });
+        }
+      }
+
+      function createCap(type, colorHex) {
+        const capGroup = new THREE.Group();
+        const capCol = new THREE.Color(colorHex);
+        const capMat = new THREE.MeshStandardMaterial({
+          color: capCol,
+          roughness: 0.25,
+          metalness: 0.1
+        });
+
+        if (currentModel === 'tarro') {
+          const lidGeo = new THREE.CylinderGeometry(0.79, 0.79, 0.2, 48);
+          const lid = new THREE.Mesh(lidGeo, capMat);
+          lid.position.y = 0.5;
+          lid.castShadow = true;
+          capGroup.add(lid);
+        } else {
+          if (type === 'rosca') {
+            const capGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.26, 36);
+            const cap = new THREE.Mesh(capGeo, capMat);
+            cap.position.y = 1.15;
+            cap.castShadow = true;
+            capGroup.add(cap);
+          } else if (type === 'fliptop') {
+            const baseGeo = new THREE.CylinderGeometry(0.25, 0.25, 0.22, 36);
+            const topGeo = new THREE.CylinderGeometry(0.23, 0.23, 0.12, 36);
+            const base = new THREE.Mesh(baseGeo, capMat);
+            const top = new THREE.Mesh(topGeo, capMat);
+            base.position.y = 1.12;
+            top.position.y = 1.25;
+            base.castShadow = true;
+            top.castShadow = true;
+            capGroup.add(base);
+            capGroup.add(top);
+          }
+        }
+        return capGroup;
+      }
+
+      function createLabelMesh(texture) {
+        let r = 0.625;
+        let h = 0.7;
+        let y = -0.25;
+        if (currentModel === 'cilindro') { r = 0.465; h = 0.8; y = -0.1; }
+        else if (currentModel === 'tarro') { r = 0.785; h = 0.55; y = -0.15; }
+
+        const labelGeo = new THREE.CylinderGeometry(r, r, h, 36, 1, true, -Math.PI / 4, Math.PI / 2);
+        const labelMat = new THREE.MeshBasicMaterial({
+          map: texture,
+          transparent: true,
+          opacity: 0.98,
+          side: THREE.DoubleSide,
+          depthWrite: false
+        });
+        const mesh = new THREE.Mesh(labelGeo, labelMat);
+        mesh.position.y = y;
+        return mesh;
+      }
+
+      function rebuildBottle() {
+        while(bottleGroup.children.length > 0){ 
+          bottleGroup.remove(bottleGroup.children[0]); 
+        }
+
+        const pts = getBottlePoints(currentModel);
+        const latheGeo = new THREE.LatheGeometry(pts, 48);
+        latheGeo.computeVertexNormals();
+        const bodyMat = createPlasticMaterial(currentMatType, currentColor);
+        bodyMesh = new THREE.Mesh(latheGeo, bodyMat);
+        bodyMesh.castShadow = true;
+        bodyMesh.receiveShadow = true;
+        bottleGroup.add(bodyMesh);
+
+        capMesh = createCap(currentCapType, currentCapColor);
+        bottleGroup.add(capMesh);
+
+        if (uploadedTexture) {
+          labelMesh = createLabelMesh(uploadedTexture);
+          bottleGroup.add(labelMesh);
+        }
+
+        updateWhatsAppLink();
+      }
+
+      // UI Listeners
+      document.querySelectorAll('.model-picker-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.model-picker-btn').forEach(b => {
+            b.classList.remove('active', 'border-emerald-500', 'bg-emerald-950/50', 'text-emerald-300');
+            b.classList.add('border-slate-800', 'bg-slate-800/50', 'text-slate-300');
+          });
+          const target = e.currentTarget;
+          target.classList.add('active', 'border-emerald-500', 'bg-emerald-950/50', 'text-emerald-300');
+          target.classList.remove('border-slate-800', 'bg-slate-800/50', 'text-slate-300');
+          currentModel = target.dataset.model;
+          
+          const caps = { boston: 'Capacidad: 500 ml', cilindro: 'Capacidad: 250 ml', tarro: 'Capacidad: 250g / 500g' };
+          document.getElementById('model-capacity-label').textContent = caps[currentModel];
+          rebuildBottle();
+        });
+      });
+
+      document.querySelectorAll('.mat-picker-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.mat-picker-btn').forEach(b => {
+            b.classList.remove('active', 'border-cyan-500', 'bg-cyan-950/50', 'text-cyan-300');
+            b.classList.add('border-slate-800', 'bg-slate-800/50', 'text-slate-300');
+          });
+          const target = e.currentTarget;
+          target.classList.add('active', 'border-cyan-500', 'bg-cyan-950/50', 'text-cyan-300');
+          target.classList.remove('border-slate-800', 'bg-slate-800/50', 'text-slate-300');
+          currentMatType = target.dataset.mat;
+          if (bodyMesh) bodyMesh.material = createPlasticMaterial(currentMatType, currentColor);
+        });
+      });
+
+      document.querySelectorAll('.color-picker-swatch').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.color-picker-swatch').forEach(b => b.classList.replace('border-white', 'border-transparent'));
+          e.currentTarget.classList.replace('border-transparent', 'border-white');
+          currentColor = e.currentTarget.dataset.color;
+          document.getElementById('color-label-main').textContent = e.currentTarget.dataset.name;
+          document.getElementById('custom-color-input-main').value = currentColor;
+          if (bodyMesh) bodyMesh.material = createPlasticMaterial(currentMatType, currentColor);
+          updateWhatsAppLink();
+        });
+      });
+
+      document.getElementById('custom-color-input-main').addEventListener('input', (e) => {
+        currentColor = e.target.value;
+        document.getElementById('color-label-main').textContent = currentColor.toUpperCase();
+        if (bodyMesh) bodyMesh.material = createPlasticMaterial(currentMatType, currentColor);
+        updateWhatsAppLink();
+      });
+
+      document.querySelectorAll('.cap-picker-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.cap-picker-btn').forEach(b => {
+            b.classList.remove('active', 'border-slate-700', 'bg-slate-800', 'text-slate-200');
+            b.classList.add('border-slate-800', 'bg-slate-800/50', 'text-slate-400');
+          });
+          e.currentTarget.classList.add('active', 'border-slate-700', 'bg-slate-800', 'text-slate-200');
+          e.currentTarget.classList.remove('border-slate-800', 'bg-slate-800/50', 'text-slate-400');
+          currentCapType = e.currentTarget.dataset.cap;
+          if (capMesh) bottleGroup.remove(capMesh);
+          capMesh = createCap(currentCapType, currentCapColor);
+          bottleGroup.add(capMesh);
+          updateWhatsAppLink();
+        });
+      });
+
+      document.querySelectorAll('.cap-color-picker-swatch').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.cap-color-picker-swatch').forEach(b => b.classList.replace('border-white', 'border-slate-700'));
+          e.currentTarget.classList.replace('border-slate-700', 'border-white');
+          currentCapColor = e.currentTarget.dataset.color;
+          if (capMesh) bottleGroup.remove(capMesh);
+          capMesh = createCap(currentCapType, currentCapColor);
+          bottleGroup.add(capMesh);
+          updateWhatsAppLink();
+        });
+      });
+
+      // Upload Logo
+      document.getElementById('logo-input-main').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            const img = new Image();
+            img.src = event.target.result;
+            img.onload = function() {
+              const tex = new THREE.Texture(img);
+              tex.needsUpdate = true;
+              uploadedTexture = tex;
+              if (labelMesh) bottleGroup.remove(labelMesh);
+              labelMesh = createLabelMesh(uploadedTexture);
+              bottleGroup.add(labelMesh);
+              document.getElementById('btn-remove-logo-main').classList.remove('hidden');
+            };
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      document.getElementById('btn-remove-logo-main').addEventListener('click', () => {
+        if (labelMesh) bottleGroup.remove(labelMesh);
+        uploadedTexture = null;
+        document.getElementById('logo-input-main').value = '';
+        document.getElementById('btn-remove-logo-main').classList.add('hidden');
+      });
+
+      // Camera Controls
+      document.getElementById('btn-reset-cam-main').addEventListener('click', () => {
+        camera.position.set(0, 0.8, 4.2);
+        controls.target.set(0, 0, 0);
+      });
+
+      let autoRotMain = true;
+      document.getElementById('btn-toggle-auto-main').addEventListener('click', () => {
+        autoRotMain = !autoRotMain;
+        controls.autoRotate = autoRotMain;
+        document.getElementById('btn-toggle-auto-main').innerHTML = autoRotMain 
+          ? '<i data-lucide="pause" class="w-3.5 h-3.5"></i> Pausar Giro'
+          : '<i data-lucide="play" class="w-3.5 h-3.5"></i> Giro Auto';
+        lucide.createIcons();
+      });
+
+      document.getElementById('btn-screenshot-main').addEventListener('click', () => {
+        renderer.render(scene, camera);
+        const dataURL = renderer.domElement.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = dataURL;
+        a.download = `Meryplast_Envase_Personalizado_${currentModel}.png`;
+        a.click();
+      });
+
+      function updateWhatsAppLink() {
+        const modelNames = { boston: 'Boston 500ml', cilindro: 'Cilindro 250ml', tarro: 'Tarro Boca Ancha' };
+        const matNames = { pet: 'PET Cristal', pead: 'PEAD Satinado', opaco: 'PP Opaco' };
+        const capNames = { rosca: 'Tapa Rosca Estriada', fliptop: 'Tapa Flip-Top' };
+        
+        const text = `Hola Emir Peña, estuve en el Configurador 3D de MERYPLAST y quiero cotizar este envase personalizado:%0A%0A` +
+          `📦 *Modelo:* ${modelNames[currentModel]}%0A` +
+          `🧪 *Material:* ${matNames[currentMatType]}%0A` +
+          `🎨 *Color Envase:* ${currentColor}%0A` +
+          `🔘 *Tapa:* ${capNames[currentCapType]} (Color: ${currentCapColor})%0A%0A` +
+          `¿Podrías enviarme precios según escala de cantidades y disponibilidad de moldes?`;
+
+        document.getElementById('btn-quote-whatsapp-main').href = `https://wa.me/573134704002?text=${text}`;
+      }
+
+      // Función global para seleccionar modelo desde el catálogo
+      window.select3DModel = function(model, color) {
+        currentModel = model;
+        if (color) currentColor = color;
+        const btn = document.querySelector(`.model-picker-btn[data-model="${model}"]`);
+        if (btn) btn.click();
+        rebuildBottle();
+        const sec = document.getElementById('configurador3d');
+        if (sec) sec.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      rebuildBottle();
+
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      });
+    })();
+  </script>
+
 </body>
 
 </html>
