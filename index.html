@@ -30,17 +30,44 @@
           },
           colors: {
             brand: {
-              50: '#f0f7ff',
-              100: '#e0effe',
-              200: '#bae0fd',
-              500: '#0284c7',
-              600: '#0369a1',
-              700: '#075985',
-              800: '#0c4a6e',
-              900: '#082f49',
-              accent: '#f97316'
+              50: '#faf5ff',
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+              300: '#d8b4fe',
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#7c3aed', // PRIMARIO: MORADO
+              700: '#6d28d9',
+              800: '#5b21b6',
+              900: '#4c1d95',
+              accent: '#38bdf8' // TERCIARIO: AZUL CLARO
+            },
+            morado: {
+              50: '#faf5ff',
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+              300: '#d8b4fe',
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              800: '#5b21b6',
+              900: '#4c1d95'
+            },
+            azulclaro: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8', // TERCIARIO: AZUL CLARO
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1'
             }
           }
+        }
+      }
+    }
         }
       }
     }
@@ -101,8 +128,8 @@
         <!-- Menú de Navegación Desktop -->
         <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
           <a href="#servicios" class="hover:text-brand-600 transition">Procesos & Servicios</a>
-          <a href="#configurador3d" class="flex items-center gap-1.5 text-emerald-600 hover:text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 transition font-bold text-xs shadow-sm">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Estudio 3D
+          <a href="#configurador3d" class="flex items-center gap-1.5 text-purple-600 hover:text-purple-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 transition font-bold text-xs shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span> Estudio 3D
         </a>
         <a href="#catalogo" class="hover:text-brand-600 transition">Catálogo de Productos</a>
           <a href="#maquinaria" class="hover:text-brand-600 transition">Capacidad Técnica</a>
@@ -358,7 +385,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950/80 px-3.5 py-1.5 rounded-full border border-emerald-500/30">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-purple-300 bg-purple-950/80 px-3.5 py-1.5 rounded-full border border-purple-500/40 shadow-sm">
           Tecnología de Previsualización MERYPLAST
         </span>
         <h2 class="text-3xl sm:text-5xl font-extrabold font-display text-white mt-4 tracking-tight">
@@ -415,7 +442,7 @@
                 <span id="model-capacity-label" class="text-xs font-semibold text-cyan-400">Capacidad: 500 ml</span>
               </div>
               <div class="grid grid-cols-3 gap-2.5">
-                <button class="model-picker-btn active p-3 rounded-2xl border border-emerald-500 bg-emerald-950/50 text-emerald-300 text-xs font-bold text-center transition flex flex-col items-center gap-1.5" data-model="boston">
+                <button class="model-picker-btn active p-3 rounded-2xl border border-purple-500 bg-purple-950/60 text-purple-200 text-xs font-bold text-center transition flex flex-col items-center gap-1.5" data-model="boston">
                   <i data-lucide="cylinder" class="w-5 h-5"></i>
                   <span>Boston 500ml</span>
                 </button>
@@ -454,18 +481,19 @@
                 <label class="text-xs font-extrabold uppercase tracking-wider text-slate-400">
                   3. Color del Envase
                 </label>
-                <span id="color-label-main" class="text-xs font-bold text-emerald-400">Verde Esmeralda MERYPLAST</span>
+                <span id="color-label-main" class="text-xs font-bold text-purple-400">Morado MERYPLAST</span>
               </div>
               <div class="flex items-center gap-2.5 flex-wrap">
-                <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-white shadow-md transition transform hover:scale-110" style="background-color: #009B5A;" data-color="#009B5A" data-name="Verde Esmeralda MERYPLAST" title="Verde Esmeralda"></button>
-                <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-slate-400 shadow-md transition transform hover:scale-110" style="background-color: #00A3E0;" data-color="#00A3E0" data-name="Cian Corporativo" title="Cian"></button>
+                <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-white shadow-md transition transform hover:scale-110" style="background-color: #7C3AED;" data-color="#7C3AED" data-name="Morado MERYPLAST" title="Morado"></button>
+                <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-slate-400 shadow-md transition transform hover:scale-110" style="background-color: #38BDF8;" data-color="#38BDF8" data-name="Azul Claro" title="Azul Claro"></button>
+                <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-slate-400 shadow-md transition transform hover:scale-110" style="background-color: #1E40AF;" data-color="#1E40AF" data-name="Azul Rey" title="Azul Rey"></button>
                 <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-slate-400 shadow-md transition transform hover:scale-110" style="background-color: #1a4480;" data-color="#1a4480" data-name="Azul Cobalto" title="Azul Cobalto"></button>
                 <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-slate-400 shadow-md transition transform hover:scale-110" style="background-color: #8c4c16;" data-color="#8c4c16" data-name="Ámbar Farmacéutico" title="Ámbar"></button>
                 <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-slate-400 shadow-md transition transform hover:scale-110" style="background-color: #ffffff;" data-color="#ffffff" data-name="Blanco Nieve" title="Blanco"></button>
                 <button class="color-picker-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-slate-400 shadow-md transition transform hover:scale-110" style="background-color: #111111;" data-color="#111111" data-name="Negro Premium" title="Negro"></button>
                 
                 <div class="relative flex items-center ml-1" title="Color personalizado libre">
-                  <input type="color" id="custom-color-input-main" value="#009B5A" class="w-8 h-8 rounded-full border border-slate-700 cursor-pointer bg-transparent">
+                  <input type="color" id="custom-color-input-main" value="#7C3AED" class="w-8 h-8 rounded-full border border-slate-700 cursor-pointer bg-transparent">
                 </div>
               </div>
             </div>
@@ -516,7 +544,7 @@
 
           <!-- BOTÓN COTIZAR DISEÑO -->
           <div class="pt-4 border-t border-slate-800">
-            <a id="btn-quote-whatsapp-main" href="https://wa.me/573134704002" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-4 px-4 rounded-2xl shadow-xl shadow-emerald-950/60 flex items-center justify-center gap-2.5 text-sm transition transform hover:-translate-y-0.5">
+            <a id="btn-quote-whatsapp-main" href="https://wa.me/573134704002" target="_blank" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-extrabold py-4 px-4 rounded-2xl shadow-xl shadow-purple-950/60 flex items-center justify-center gap-2.5 text-sm transition transform hover:-translate-y-0.5">
               <i data-lucide="message-circle" class="w-5 h-5"></i>
               <span>Cotizar este Diseño en WhatsApp</span>
             </a>
@@ -574,7 +602,7 @@
         <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
           <div>
             <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
-              <span class="absolute top-3 left-3 z-10 bg-emerald-500/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado PET</span>
+              <span class="absolute top-3 left-3 z-10 bg-purple-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado PET</span>
               <img src="assets/productos/prod_01.jpg" alt="Botella Cilíndrica Boston 500ml" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
             </div>
             <div class="p-5">
@@ -585,7 +613,7 @@
           </div>
           <div class="p-5 pt-0">
             <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
-              <a href="#configurador3d" onclick="select3DModel('boston', '#009B5A')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+              <a href="#configurador3d" onclick="select3DModel('boston', '#7C3AED')" class="text-xs font-bold text-purple-600 hover:text-purple-700 flex items-center gap-1">
                 <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
               </a>
               <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20la%20Botella%20Cil%C3%ADndrica%20Boston%20500ml" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
@@ -599,7 +627,7 @@
         <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
           <div>
             <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
-              <span class="absolute top-3 left-3 z-10 bg-cyan-600/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado PEAD</span>
+              <span class="absolute top-3 left-3 z-10 bg-sky-500 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado PEAD</span>
               <img src="assets/productos/prod_02.jpg" alt="Envase Alto Cilíndrico" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
             </div>
             <div class="p-5">
@@ -610,7 +638,7 @@
           </div>
           <div class="p-5 pt-0">
             <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
-              <a href="#configurador3d" onclick="select3DModel('cilindro', '#00A3E0')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+              <a href="#configurador3d" onclick="select3DModel('cilindro', '#00A3E0')" class="text-xs font-bold text-purple-600 hover:text-purple-700 flex items-center gap-1">
                 <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
               </a>
               <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20el%20Envase%20Alto%20Esbelto" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
@@ -635,7 +663,7 @@
           </div>
           <div class="p-5 pt-0">
             <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
-              <a href="#configurador3d" onclick="select3DModel('tarro', '#ffffff')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+              <a href="#configurador3d" onclick="select3DModel('tarro', '#ffffff')" class="text-xs font-bold text-purple-600 hover:text-purple-700 flex items-center gap-1">
                 <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
               </a>
               <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20el%20Tarro%20Boca%20Ancha" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
@@ -649,7 +677,7 @@
         <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
           <div>
             <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
-              <span class="absolute top-3 left-3 z-10 bg-emerald-500/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado PET</span>
+              <span class="absolute top-3 left-3 z-10 bg-purple-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado PET</span>
               <img src="assets/productos/prod_04.jpg" alt="Botella Boston 250ml" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
             </div>
             <div class="p-5">
@@ -660,7 +688,7 @@
           </div>
           <div class="p-5 pt-0">
             <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
-              <a href="#configurador3d" onclick="select3DModel('cilindro', '#009B5A')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+              <a href="#configurador3d" onclick="select3DModel('cilindro', '#38BDF8')" class="text-xs font-bold text-purple-600 hover:text-purple-700 flex items-center gap-1">
                 <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
               </a>
               <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20la%20Botella%20250ml" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
@@ -674,7 +702,7 @@
         <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
           <div>
             <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
-              <span class="absolute top-3 left-3 z-10 bg-cyan-600/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado PEAD</span>
+              <span class="absolute top-3 left-3 z-10 bg-sky-500 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado PEAD</span>
               <img src="assets/productos/prod_05.jpg" alt="Envase Cilíndrico Translúcido" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
             </div>
             <div class="p-5">
@@ -685,7 +713,7 @@
           </div>
           <div class="p-5 pt-0">
             <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
-              <a href="#configurador3d" onclick="select3DModel('boston', '#ffffff')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+              <a href="#configurador3d" onclick="select3DModel('boston', '#ffffff')" class="text-xs font-bold text-purple-600 hover:text-purple-700 flex items-center gap-1">
                 <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
               </a>
               <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20el%20Envase%20Transl%C3%BAcido%20500ml" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
@@ -710,7 +738,7 @@
           </div>
           <div class="p-5 pt-0">
             <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
-              <a href="#configurador3d" onclick="select3DModel('cilindro', '#8c4c16')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+              <a href="#configurador3d" onclick="select3DModel('cilindro', '#8c4c16')" class="text-xs font-bold text-purple-600 hover:text-purple-700 flex items-center gap-1">
                 <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
               </a>
               <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20la%20Botella%20Gotero" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
@@ -724,7 +752,7 @@
         <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
           <div>
             <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
-              <span class="absolute top-3 left-3 z-10 bg-cyan-600/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado Técnico</span>
+              <span class="absolute top-3 left-3 z-10 bg-sky-500 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Soplado Técnico</span>
               <img src="assets/productos/prod_07.jpg" alt="Frasco Químico Cuello Reforzado" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
             </div>
             <div class="p-5">
@@ -735,7 +763,7 @@
           </div>
           <div class="p-5 pt-0">
             <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
-              <a href="#configurador3d" onclick="select3DModel('boston', '#ffffff')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+              <a href="#configurador3d" onclick="select3DModel('boston', '#ffffff')" class="text-xs font-bold text-purple-600 hover:text-purple-700 flex items-center gap-1">
                 <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
               </a>
               <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20el%20Frasco%20Cuello%20Reforzado" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
@@ -749,7 +777,7 @@
         <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="envases">
           <div>
             <div class="h-60 bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden group">
-              <span class="absolute top-3 left-3 z-10 bg-emerald-500/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Línea Premium</span>
+              <span class="absolute top-3 left-3 z-10 bg-purple-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">Línea Premium</span>
               <img src="assets/productos/prod_08.jpg" alt="Envase Ergonómico" class="max-h-full max-w-full object-contain transform group-hover:scale-105 transition duration-300">
             </div>
             <div class="p-5">
@@ -760,7 +788,7 @@
           </div>
           <div class="p-5 pt-0">
             <div class="border-t border-slate-100 pt-3 flex items-center justify-between">
-              <a href="#configurador3d" onclick="select3DModel('boston', '#009B5A')" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+              <a href="#configurador3d" onclick="select3DModel('boston', '#7C3AED')" class="text-xs font-bold text-purple-600 hover:text-purple-700 flex items-center gap-1">
                 <i data-lucide="box" class="w-3.5 h-3.5"></i> Ver en 3D
               </a>
               <a href="https://wa.me/573134704002?text=Hola%20Emir%2C%20quiero%20cotizar%20el%20Envase%20Ergon%C3%B3mico%20500ml" target="_blank" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-0.5">
@@ -964,12 +992,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
         <div>
-          <div class="flex items-center gap-2 mb-3">
-            <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white">
-              <i data-lucide="layers" class="w-4 h-4"></i>
-            </div>
-            <span class="text-lg font-bold font-display text-white">PLASTI<span
-                class="text-brand-500">CORP</span></span>
+          <div class="flex items-center gap-3 mb-3">
+            <img src="assets/logo-meryplast.png" alt="MERYPLAST" class="h-10 w-auto object-contain">
+            <span class="text-xl font-bold font-display text-white">MERY<span class="text-sky-400">PLAST</span></span>
           </div>
           <p class="text-slate-500 leading-relaxed">
             Líderes en transformación de resinas plásticas industriales. Inyección de precisión, soplado de envases y
@@ -1135,11 +1160,11 @@
       keyLight.shadow.mapSize.height = 1024;
       scene.add(keyLight);
 
-      const fillLight = new THREE.DirectionalLight(0x7dd3fc, 0.75);
+      const fillLight = new THREE.DirectionalLight(0x38bdf8, 0.85); // Azul claro fill light
       fillLight.position.set(-4, 3, 3);
       scene.add(fillLight);
 
-      const rimLight = new THREE.DirectionalLight(0x34d399, 1.0);
+      const rimLight = new THREE.DirectionalLight(0xc084fc, 1.1); // Morado rim light
       rimLight.position.set(0, 5, -4);
       scene.add(rimLight);
 
@@ -1164,7 +1189,7 @@
 
       let currentModel = 'boston';
       let currentMatType = 'pet';
-      let currentColor = '#009B5A';
+      let currentColor = '#7C3AED';
       let currentCapType = 'rosca';
       let currentCapColor = '#ffffff';
 
